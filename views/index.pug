@@ -2,7 +2,7 @@ extends layout
 
 block content
   div.jumbotron.my-3
-    h1.display-4 予定調整くん
+    h1.display-4 #{title}
     p.lead 予定調整くんは、GitHubで認証でき、予定を作って出欠が取れるサービスです
   if user
     div
@@ -14,8 +14,10 @@ block content
         tr
           th 予定名
           th 更新日時
+          th 予定作成者
         each schedule in schedules
           tr
             td
               a(href=`/schedules/${schedule.scheduleId}`) #{schedule.scheduleName}
             td #{schedule.formattedUpdatedAt}
+            td #{user.username}
