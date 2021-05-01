@@ -12,15 +12,15 @@ var Schedule = require('./models/schedule');
 var Availability = require('./models/availability');
 var Candidate = require('./models/candidate');
 var Comment = require('./models/comment');
-User.sync().then(() => {
+User.sync({ alter: true }).then(() => {
   Schedule.belongsTo(User, { foreignKey: 'createdBy' });
-  Schedule.sync();
+  Schedule.sync({ alter: true });
   Comment.belongsTo(User, { foreignKey: 'userId' });
-  Comment.sync();
+  Comment.sync({ alter: true });
   Availability.belongsTo(User, { foreignKey: 'userId' });
-  Candidate.sync().then(() => {
+  Candidate.sync({ alter: true }).then(() => {
     Availability.belongsTo(Candidate, { foreignKey: 'candidateId' });
-    Availability.sync();
+    Availability.sync({ alter: true });
   });
 });
 

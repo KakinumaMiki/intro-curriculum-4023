@@ -3,14 +3,17 @@ const loader = require('./sequelize-loader');
 const Sequelize = loader.Sequelize;
 
 const Comment = loader.database.define('comments', {
+  commentId: {type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+    allowNull: false
+  },
   scheduleId: {
     type: Sequelize.UUID,
-    primaryKey: true,
     allowNull: false
   },
   userId: {
     type: Sequelize.INTEGER,
-    primaryKey: true,
     allowNull: false
   },
   comment: {
