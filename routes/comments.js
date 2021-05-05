@@ -19,3 +19,16 @@ router.post('/:scheduleId/users/:userId/comments', authenticationEnsurer, (req, 
 });
 
 module.exports = router;
+
+router.get('/:scheduleId/users/:userId/comments', authenticationEnsurer, (req, res, next) => {
+  Comment.findOne({
+    where: {
+      scheduleId: req.params.scheduleId,
+      userId: req.params.userId
+    }
+  }).then((comments) => {
+    comments.destroy().then(() => {
+      res.redirect('/');
+    });
+  });
+});
